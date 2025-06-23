@@ -1,0 +1,5 @@
+numpy
+scikit-learn
+tensorflow    # or pytorch, or whatever ML framework you're using
+requests      # if your python script fetches images from URLs
+opencv-python 

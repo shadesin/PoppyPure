@@ -1,0 +1,21 @@
+[build]
+  base = "api_ul/client/"
+  command = "npm run build"
+  publish = "dist/" 
+  functions = "api_ul/client/netlify/functions" # Keep this if you have functions
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/server/:splat" # This redirects all /api requests to your serverless function
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+  [functions]
+  node_bundler = "esbuild" # Recommended for faster builds and smaller function sizes
+  # This path should point to the directory containing your Netlify Function entry file.
+  # For an Express app as a function, you'll typically have an 'index.js' (or similar) here.
+  directory = "netlify/functions" # This is where your serverless function code will reside

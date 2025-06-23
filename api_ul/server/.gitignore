@@ -1,0 +1,10 @@
+# Environment Variables & Local Config
+# Specifically ignore the .env file in api_ul/client/
+/api_ul/client/.env
+# Also ignore any other .env files found anywhere else in the repo
+**/.env
+# Ignore common local configuration patterns
+*.local
+.env.* # Catches files like .env.development, .env.production, etc.
+
+node_modules

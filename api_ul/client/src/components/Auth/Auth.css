@@ -1,0 +1,784 @@
+/* src/components/Auth/Auth.css */
+:root {
+  --primary-green: #388E3C;
+  --dark-green: #2E7D32;
+  --light-green: #A5D6A7;
+  --header-text-color: #4CAF50;
+  --dark-brown-text: #4E342E;
+  --input-border: #DCDCDC;
+  --input-background: #FDFDFD;
+  --white: #FFFFFF;
+  --off-white: #FCFCFC;
+  --medium-grey-text: #757575;
+  --error-red: #C62828;
+  --error-background: #FFEBEE;
+  /* Theme variables */
+  --text-color: #4E342E;
+  --navbar-bg: rgba(255, 255, 255, 0.7); /* Light mode navbar background with opacity */
+  --container-bg: #FFFFFF;
+  --button-bg: #388E3C;
+  --button-text: #FFFFFF;
+  --input-bg: #FDFDFD;
+  --background-image: url('/assets/images/background.jpg');
+}
+
+[data-theme="dark"] {
+  --text-color: #f8f9fa;
+  --navbar-bg: rgba(0, 0, 0, 0.7); /* Dark mode navbar background with opacity */
+  --container-bg: #2d2d2d;
+  --button-bg: #6b7280;
+  --button-text: #f8f9fa;
+  --input-bg: #3a3a3a;
+  --input-border: #6b7280;
+  --medium-grey-text: #9ca3af;
+  --white: #2d2d2d;
+  --off-white: #2d2d2d;
+  background: url('/assets/images/background2.png') no-repeat center center fixed !important; /* New dark mode background */
+  background-size: cover;
+}
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--background-image) no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  color: var(--text-color);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(220, 237, 200, 0.5);
+  z-index: -1;
+}
+
+.auth-container {
+  max-width: 500px;
+  width: 90%;
+  padding: 3.5rem;
+  background: var(--container-bg);
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  animation: fadeInUp 0.9s ease-out forwards;
+  box-sizing: border-box;
+  margin-top: 50px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* Adjusted for non-fixed positioning */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auth-container h2 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: var(--header-text-color);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.form-group {
+  margin-bottom: 1.8rem;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.7rem;
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3.2rem;
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  font-size: 1.1rem;
+  background-color: var(--input-bg);
+  box-sizing: border-box;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  color: var(--input-color);
+}
+
+.form-group input::placeholder {
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.form-group input:focus {
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(56, 142, 60, 0.2);
+  outline: none;
+}
+
+.form-group .input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(calc(-50% + 15px));
+  height: 20px;
+  width: 20px;
+  pointer-events: none;
+  z-index: 1;
+  color: var(--medium-grey-text);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.form-group .user-icon {
+  background-image: url('/assets/icons/user.svg');
+}
+
+.form-group .email-icon {
+  background-image: url('/assets/icons/email.svg');
+}
+
+.form-group .lock-icon {
+  background-image: url('/assets/icons/lock.svg');
+}
+
+.auth-button {
+  width: 100%;
+  padding: 1rem.2rem;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.auth-button:hover {
+  background: var(--dark-green);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.auth-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(0, 0, 0 Oakland, CA0.15);
+}
+
+.error-message {
+  padding: 0.9rem;
+  margin-bottom: 1.8rem;
+  background-color: var(--error-background);
+  color: var(--error-red);
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid var(--error-red);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 3.5rem;
+  background-color: var(--navbar-bg); /* Changed to use variable */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-sizing: border-box;
+  height: 80px; /* Explicitly set navbar height if it's not consistent */
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+  text-decoration: none;
+  letter-spacing: 0.8px;
+}
+
+.navbar-brand img {
+  height: 60px;
+  margin-right: 8px;
+}
+
+.navbar-auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+
+
+/* Styling for the new dropdown feature */
+
+/* Container for the brand and dropdown to control positioning */
+.navbar-left-section {
+  position: relative; /* Essential for positioning the dropdown relative to it */
+  display: flex; /* Align items horizontally */
+  align-items: center; /* Vertically center content */
+  gap: 0.5rem; /* Space between logo and dropdown toggle, if applicable */
+}
+
+/* Styling for the new dropdown toggle button */
+.dropdown-toggle-button {
+  background-color: transparent; /* Transparent background */
+  border: none; /* No border */
+  color: var(--text-color); /* Use theme text color */
+  cursor: pointer;
+  padding: 0.5rem; /* Adjust padding as needed */
+  display: flex; /* Use flexbox for icon alignment */
+  align-items: center; /* Vertically align icon */
+  justify-content: center; /* Horizontally align icon */
+  font-size: 1rem; /* Adjust font size if text is added later */
+  border-radius: 50%; /* Make it circular */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.dropdown-toggle-button:hover {
+  background-color: rgba(var(--text-color-rgb), 0.1); /* Subtle hover background */
+}
+
+/* Styling for the arrow icon inside the button */
+.dropdown-arrow-icon {
+  transition: transform 0.3s ease; /* Smooth rotation */
+}
+
+.dropdown-arrow-icon.open {
+  transform: rotate(180deg); /* Rotate 180 degrees when dropdown is open */
+}
+
+/* Styles for the dropdown menu itself */
+.features-dropdown-menu {
+  flex-direction: column;
+  position: absolute;
+  top: calc(100% + 0.5rem);  /* Position right below the navbar-brand (which is in navbar-left-section) */
+  left: 0;
+  background-color: var(--navbar-bg); /* Use navbar background color */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  min-width: 220px; /* Adjust as needed */
+  z-index: 1000; /* Ensure it appears above other content */
+  padding: 0.5rem 0; /* Vertical padding inside the dropdown */
+  list-style: none; /* Remove default list styling if using ul */
+  margin: 0.5rem 0 0 0; /* Space below the trigger, adjust as needed */
+
+  /* Smooth transition for appearance/disappearance */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px); /* Start slightly above and move down */
+  pointer-events: none;
+  
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0.3s ease-out;
+  transition-delay: 0s, 0s, 0.3s; /* No delay for opacity/transform; 0.2s delay for visibility when hiding */
+}
+
+/* When the dropdown is open (controlled by React state) */
+.features-dropdown-menu.open { /* TARGET THE 'open' CLASS DIRECTLY */
+  opacity: 1;                   /* Fade in */
+  visibility: visible;          /* Visible */
+  transform: translateY(0);     /* Slide down into view */
+  pointer-events: auto;         /* Enable clicks when visible */
+  transition-delay: 0s, 0s, 0s; /* No delay when opening */
+}
+
+/* Styles for individual items within the dropdown */
+.dropdown-item {
+  display: block; /* Make sure links take full width */
+  padding: 0.8rem 1.2rem;
+  color: var(--text-color); /* Use theme text color */
+  text-decoration: none;
+  font-weight: 500;
+  white-space: nowrap; /* Prevent text from wrapping */
+  cursor: pointer; /* Indicate clickable */
+}
+
+.dropdown-item:hover {
+  background-color: var(--light-green); /* Highlight on hover */
+  color: var(--dark-green);
+}
+
+/* Specific style for the disabled "Pro Feature" item */
+.dropdown-item.disabled {
+  color: var(--medium-grey-text); /* Mute color for disabled */
+  cursor: default; /* Change cursor for non-clickable item */
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.dropdown-item.disabled:hover {
+  background-color: transparent; /* No hover effect for disabled */
+  color: var(--medium-grey-text);
+}
+
+
+
+
+/* Add these styles to Auth.css */
+
+/* Hide regular links and show hamburger on smaller screens */
+.navbar-links {
+  display: flex; /* Keep it flex for desktop */
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.3s ease-out; 
+}
+
+/* Hamburger menu button */
+.hamburger-menu {
+  display: none; /* Hidden by default on larger screens */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001; /* Ensure it's above other elements if needed */
+}
+
+.hamburger-icon {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: var(--text-color); /* Use theme text color */
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+
+/* Mobile Menu Styles */
+@media (max-width: 768px) { /* Adjust breakpoint as needed */
+  .navbar-links {
+    /* display: none; Hide regular links on small screens */
+    flex-direction: column;
+    position: absolute;
+    top: 80px; /* Position below the navbar */
+    left: 0;
+    width: 100%;
+    background-color: var(--navbar-bg); /* Use navbar background color */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+    align-items: center;
+    z-index: 999; /* Below the navbar but above other page content */
+
+    /* --- IMPORTANT CHANGES FOR SMOOTH TRANSITION --- */
+    transform: translateY(-100%); /* Start hidden above the viewport */
+    opacity: 0;                   /* Start invisible */
+    visibility: hidden;           /* Hidden from screen readers/interactions */
+    pointer-events: none;         /* Disable clicks when hidden */
+
+    /* Transition for sliding and fading in/out */
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s ease-out;
+    /* Delay visibility change slightly to allow transform/opacity to finish */
+    transition-delay: 0s, 0s, 0.3s; /* No delay for transform/opacity, 0.3s delay for visibility when closing */
+  }
+
+
+  .navbar-links.open {
+    transform: translateY(0);     /* Slide down into view */
+    opacity: 1;                   /* Fade in */
+    visibility: visible;          /* Visible */
+    pointer-events: auto;         /* Enable clicks when visible */
+    transition-delay: 0s, 0s, 0s; /* No delay when opening */
+  }
+
+  .navbar-links .user-section,
+  .navbar-links .auth-link {
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem 0;
+    justify-content: center; /* Center content in user-section */
+    border-bottom: 1px solid rgba(var(--text-color-rgb), 0.1); /* Optional separator */
+  }
+
+  .navbar-links .auth-link:last-child {
+    border-bottom: none; /* No border for the last item */
+  }
+
+  .navbar-links .auth-link.active {
+    background-color: var(--primary-green); /* Example: active link styling */
+    color: var(--button-text);
+  }
+
+  .navbar-links .theme-toggle-switch,
+  .navbar-links .profile-icon-button,
+  .navbar-links .logout-button {
+    margin: 0.5rem 0; /* Add spacing for buttons in mobile menu */
+  }
+
+  /* Show hamburger menu button */
+  .hamburger-menu {
+    display: block; /* Show hamburger button on small screens */
+  }
+
+  /* Optional: Animate hamburger icon to 'X' */
+  .hamburger-menu.open .hamburger-icon:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger-menu.open .hamburger-icon:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger-menu.open .hamburger-icon:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+
+
+
+
+.auth-link.inactive {
+  padding: 0.7rem 1.4rem;
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--button-bg);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-align: center;
+  min-width: 95px;
+}
+
+.auth-link.inactive:hover {
+  background-color: var(--light-green);
+  color: var(--dark-green);
+}
+
+.auth-link.active {
+  padding: 0.7rem 1.4rem;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: 1px solid var(--button-bg);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  text-align: center;
+  min-width: 95px;
+}
+
+.auth-link.active:hover {
+  background-color: var(--dark-green);
+}
+
+.welcome-message {
+  margin-right: 1rem;
+  color: var(--text-color);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: var(--text-color);
+}
+
+.profile-icon-button:hover {
+  background-color: var(--light-green);
+}
+
+.logout-button {
+  padding: 0.8rem 1.6rem;
+  background-color: rgb(211, 11, 11);
+  color: var(--button-text);
+  border: 1px solid var(--button-bg);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.logout-button:hover {
+  background-color: rgb(170, 10, 10);
+}
+
+.profile-tab {
+  position: fixed;
+  top: 80px; /* Adjust this value to match your navbar's height */
+  right: 0;
+  width: 350px;
+  height: calc(100vh - 80px); /* Adjust calculation based on navbar height */
+  background-color: var(--container-bg);
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  z-index: 1000;
+  overflow-y: auto;
+  transform: translateX(100%); /* Start off-screen */
+  transition: transform 0.3s ease-out, background-color 0.3s ease; /* Smooth slide */
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack children vertically */
+}
+
+.profile-tab.is-open { /* New class to control visibility and transition */
+  transform: translateX(0); /* Slide in when visible */
+}
+
+.close-tab-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: var(--text-color);
+}
+
+.close-tab-btn:hover {
+  background-color: var(--light-green);
+}
+
+.profile-tab h3 {
+  color: var(--header-text-color);
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.profile-info p {
+  margin: 0.5rem 0;
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.uploaded-images-history {
+  flex-grow: 1; /* Allow this section to take up available space */
+  overflow-y: auto; /* Enable scrolling for image list */
+  margin-bottom: 1rem; /* Add some space before actions */
+}
+
+.uploaded-images-history h4 {
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.image-history-list {
+  list-style: none;
+  padding: 0;
+}
+
+.image-history-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--input-border);
+}
+
+.image-preview-thumbnail {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.image-preview-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-name {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.delete-image-btn {
+  background: none;
+  border: none;
+  color: var(--error-red);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+
+.delete-image-btn:hover {
+  background-color: var(--error-background);
+}
+
+.profile-actions {
+  margin-top: auto; /* Push this div to the bottom */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.delete-account-button {
+  padding: 0.8rem;
+  background-color: var(--error-red);
+  color: var(--button-text);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+  text-align: center;
+}
+
+.delete-account-button:hover {
+  background-color: rgb(170, 10, 10);
+}
+
+.upload-section {
+  margin-top: 100px;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.file-upload-container {
+  max-width: 600px;
+  width: 100%;
+  padding: 2rem;
+  background: var(--container-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.file-upload-container h3 {
+  color: var(--medium-grey-text);
+  margin-bottom: 1.5rem;
+}
+
+.file-upload-label {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.file-upload-label:hover {
+  background-color: var(--dark-green);
+}
+
+.file-upload-container.drag-active {
+  background-color: var(--input-bg);
+  border: 2px dashed var(--primary-green);
+}
+
+.upload-button {
+  margin-top: 1rem;
+}
+
+/* Theme Toggle Switch */
+.theme-toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  cursor: pointer;
+}
+
+.theme-toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-toggle-switch .slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: background-color 0.3s ease;
+}
+
+.theme-toggle-switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle-switch input:checked + .slider {
+  background-color: #2196F3;
+}
+
+.theme-toggle-switch input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Sun and Moon Icons */
+.theme-toggle-switch .slider:after {
+  content: "☀️";
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #fff;
+  transition: opacity 0.3s ease;
+}
+
+.theme-toggle-switch input:checked + .slider:after {
+  content: "🌙";
+  left: auto;
+  right: 10px;
+  opacity: 1;
+}
+
+.theme-toggle-switch:hover .slider {
+  box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+  .auth-container {
+    padding: 2rem;
+  }
+}
